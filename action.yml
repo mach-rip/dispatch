@@ -1,0 +1,20 @@
+name: Mach dispatch
+description: Select a local Mach runner or a GitHub-hosted fallback on runs-on mach.
+inputs:
+  fallback-runner:
+    description: GitHub-hosted label to use when local capacity is unavailable.
+    default: ubuntu-latest
+outputs:
+  runner:
+    description: Selected execution runner label.
+    value: ''
+  is-fallback:
+    description: Whether the selected runner is the hosted fallback.
+    value: ''
+runs:
+  using: composite
+  steps:
+    - shell: bash
+      run: |
+        echo '::error::mach-rip/dispatch requires runs-on: mach'
+        exit 1
